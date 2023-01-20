@@ -7,3 +7,27 @@ export interface ContextProps {
 export interface UIstate {
   slideMenu: boolean;
 }
+
+export interface EntriesContextProps {
+  entries:Entrie[]
+  addEntrie: () => void
+  removeEntrie: () => void
+}
+export enum Status {
+  pending,
+  current,
+  done
+}
+
+export interface Entrie {
+  id:() => string
+  title:string
+  description:string
+  status:Status
+  create:number
+}
+
+
+export interface EntrieState{
+  entries:Entrie[]
+}

@@ -5,11 +5,14 @@ import createEmotionCache from "@/theme/createEmotionCache";
 import { lightMode, darkMode } from "@/theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { UIProvider } from "@/context/ui";
+import { EntrieProvider } from "@/context/entries";
 
 const clientSideEmotionCache: EmotionCache = createEmotionCache();
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
+
+    <EntrieProvider>
     <UIProvider>
       <CacheProvider value={clientSideEmotionCache}>
         <ThemeProvider theme={darkMode}>
@@ -18,5 +21,6 @@ export function Providers({ children }: { children: React.ReactNode }) {
         </ThemeProvider>
       </CacheProvider>
     </UIProvider>
+    </EntrieProvider>
   );
 }
