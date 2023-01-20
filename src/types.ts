@@ -1,3 +1,5 @@
+import { Add } from "./context/entries";
+
 export interface ContextProps {
   slideMenu: boolean;
   openSlide: () => void;
@@ -10,7 +12,7 @@ export interface UIstate {
 
 export interface EntriesContextProps {
   entries:Entrie[]
-  addEntrie: () => void
+  addEntrie: ({ title, description }:Add) => void
   removeEntrie: () => void
 }
 export enum Status {
@@ -20,7 +22,7 @@ export enum Status {
 }
 
 export interface Entrie {
-  id:() => string
+  id: string
   title:string
   description:string
   status:Status

@@ -1,8 +1,8 @@
-import { EntrieState } from "@/types";
+import { Entrie, EntrieState } from "@/types";
 
 type EntrieAction =
   | {
-      type: "ENTRIE-ADD";
+      type: "ENTRIE-ADD",payload:Entrie;
     }
   | { type: "ENTRIE-REMOVE" };
 
@@ -14,6 +14,7 @@ export const EntrieReducer = (
     case "ENTRIE-ADD":
       return {
         ...state,
+        entries:[...state.entries,action.payload]
       };
 
     case "ENTRIE-REMOVE":

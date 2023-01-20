@@ -1,2 +1,6 @@
 export * from "./NavBar"
 export * from "./Slider"
+export * from "./Entries"
+export * from "../EntriesItem"
+export * from "../EntriesList"
+export * from "../FormNewEntry"
