@@ -4,7 +4,8 @@ import { UIContext, UIReducer } from "./";
 
 const UI_INITIAL_STATE: UIstate = {
   slideMenu: false,
-  formIsOpen:false
+  formIsOpen:false,
+  isDragging:false
 };
 
 type Props = {
@@ -30,8 +31,15 @@ export const UIProvider: FC<Props> = ({ children }) => {
     dispatch({ type: "UI-Form-Close" });
   };
 
+  const startDragging = () => {
+    dispatch({ type: "UI-Start-Dragging" });
+  };
+  const endDragging = () => {
+    dispatch({ type: "UI-End-Dragging" });
+  };
+
   return (
-    <UIContext.Provider value={{ ...state, openSlide, closeSlide,openForm,closeForm }}>
+    <UIContext.Provider value={{ ...state, openSlide, closeSlide,openForm,closeForm ,startDragging,endDragging}}>
       {children}
     </UIContext.Provider>
   );

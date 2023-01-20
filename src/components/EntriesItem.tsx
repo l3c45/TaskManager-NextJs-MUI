@@ -4,18 +4,23 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { DragEvent, DragEventHandler, FC } from "react";
+import { DragEvent, DragEventHandler, FC, useContext } from "react";
 import { Entrie } from "@/types";
 import { CardActionArea } from "@mui/material";
+import { UIContext } from "@/context/ui";
 
 const EntriesItem: FC<Entrie> = ({ id,title, description, create }) => {
 
+  const {startDragging,endDragging} = useContext(UIContext)
+
   const onDragStart=(e:DragEvent)=>{
+    startDragging()
 
 e.dataTransfer.setData("id",id)
   }
 
   const onDragEnd=()=>{
+    endDragging()
     console.log("FIN")
   }
 

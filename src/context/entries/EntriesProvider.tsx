@@ -1,4 +1,4 @@
-import { EntrieState, Status } from "@/types";
+import { Entrie, EntrieState, Status } from "@/types";
 import { FC, ReactNode, useReducer } from "react";
 import { v4 } from "uuid";
 
@@ -35,14 +35,15 @@ type Props = {
   children?: ReactNode;
 };
 
-export type Add={
-  title:string,description:string
-}
+export type Add = {
+  title: string;
+  description: string;
+};
 
 export const EntrieProvider: FC<Props> = ({ children }) => {
   const [state, dispatch] = useReducer(EntrieReducer, UI_INITIAL_STATE);
 
-  const addEntrie = ({ title, description }:Add) => {
+  const addEntrie = ({ title, description }: Add) => {
     const newEntrie = {
       id: v4(),
       title,
@@ -53,12 +54,18 @@ export const EntrieProvider: FC<Props> = ({ children }) => {
     dispatch({ type: "ENTRIE-ADD", payload: newEntrie });
   };
 
+  const updateEntrie = (entrie :Entrie) => {
+    dispatch({ type: "ENTRIE-UPDATE", payload: entrie });
+  };
+
   const removeEntrie = () => {
     dispatch({ type: "ENTRIE-REMOVE" });
   };
 
   return (
-    <EntriesContext.Provider value={{ ...state, addEntrie, removeEntrie }}>
+    <EntriesContext.Provider
+      value={{ ...state, addEntrie, removeEntrie, updateEntrie }}
+    >
       {children}
     </EntriesContext.Provider>
   );

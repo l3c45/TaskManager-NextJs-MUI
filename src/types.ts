@@ -3,6 +3,9 @@ import { Add } from "./context/entries";
 export interface ContextProps {
   slideMenu: boolean;
   formIsOpen: boolean;
+  isDragging: boolean;
+  startDragging: () => void;
+  endDragging: () => void;
   openSlide: () => void;
   closeSlide: () => void;
   openForm: () => void;
@@ -12,11 +15,13 @@ export interface ContextProps {
 export interface UIstate {
   slideMenu: boolean;
   formIsOpen: boolean;
+  isDragging: boolean;
 }
 
 export interface EntriesContextProps {
   entries: Entrie[];
   addEntrie: ({ title, description }: Add) => void;
+  updateEntrie: (entrie: Entrie) => void;
   removeEntrie: () => void;
 }
 export enum Status {

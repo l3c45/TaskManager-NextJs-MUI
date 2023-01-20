@@ -4,7 +4,9 @@ type UIAction =
   | {type: "UI-Open";}
   | { type: "UI-Close" }
   | { type: "UI-Form-Open" }
-  | { type: "UI-Form-Close" };
+  | { type: "UI-Form-Close" }
+  | { type: "UI-Start-Dragging" }
+  | { type: "UI-End-Dragging" }
 
 export const UIReducer = (state: UIstate, action: UIAction): UIstate => {
   switch (action.type) {
@@ -29,6 +31,16 @@ export const UIReducer = (state: UIstate, action: UIAction): UIstate => {
         ...state,
         formIsOpen: false,
       };
+      case "UI-Start-Dragging":
+        return {
+          ...state,
+          isDragging: true,
+        };
+        case "UI-End-Dragging":
+          return {
+            ...state,
+            isDragging: false,
+          };
 
     default:
       return { ...state };
