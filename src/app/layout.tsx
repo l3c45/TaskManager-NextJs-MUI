@@ -1,3 +1,6 @@
+
+import NavBar from "@/components/ui/NavBar";
+import Slider from "@/components/ui/Slider";
 import "./globals.css";
 import { Providers } from "./providers";
 
@@ -14,7 +17,13 @@ export default function RootLayout({
       */}
       <head />
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          <NavBar></NavBar>
+          <Slider></Slider>
+          {/* <Slider></Slider> */}
+
+          {children}
+        </Providers>
       </body>
     </html>
   );
