@@ -4,15 +4,24 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { FC } from "react";
+import { DragEvent, DragEventHandler, FC } from "react";
 import { Entrie } from "@/types";
 import { CardActionArea } from "@mui/material";
 
-const EntriesItem: FC<Entrie> = ({ title, description, create }) => {
+const EntriesItem: FC<Entrie> = ({ id,title, description, create }) => {
+
+  const onDragStart=(e:DragEvent)=>{
+
+e.dataTransfer.setData("id",id)
+  }
+
+  const onDragEnd=()=>{
+    console.log("FIN")
+  }
 
   const date=new Date(create).toString()
   return (
-    <Card sx={{margin:"5px", backgroundColor: "transparent", marginBottom: "10px" }}>
+    <Card draggable onDragEnd={onDragEnd} onDragStart={onDragStart} sx={{margin:"5px", backgroundColor: "transparent", marginBottom: "10px" }}>
       <CardActionArea>
         <CardContent>
           <Typography variant="h6" color="text.secondary" gutterBottom>

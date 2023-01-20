@@ -4,6 +4,7 @@ import { UIContext, UIReducer } from "./";
 
 const UI_INITIAL_STATE: UIstate = {
   slideMenu: false,
+  formIsOpen:false
 };
 
 type Props = {
@@ -21,8 +22,16 @@ export const UIProvider: FC<Props> = ({ children }) => {
     dispatch({ type: "UI-Close" });
   };
 
+  const openForm = () => {
+    dispatch({ type: "UI-Form-Open" });
+  };
+
+  const closeForm = () => {
+    dispatch({ type: "UI-Form-Close" });
+  };
+
   return (
-    <UIContext.Provider value={{ ...state, openSlide, closeSlide }}>
+    <UIContext.Provider value={{ ...state, openSlide, closeSlide,openForm,closeForm }}>
       {children}
     </UIContext.Provider>
   );

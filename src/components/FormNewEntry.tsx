@@ -3,12 +3,12 @@ import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { ChangeEvent, FC, useContext, useState } from "react";
 import { Fab } from "@mui/material";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { EntriesContext } from "@/context/entries";
+import { UIContext } from "@/context/ui";
 
 interface FormInputs {
   title: string;
@@ -22,9 +22,9 @@ interface FormClicked {
 
 const FormNewEntry: FC = () => {
 
-  const {addEntrie} = useContext(EntriesContext)
-
-  const [open, setOpen] = useState<boolean>(false);
+  const { addEntrie } = useContext(EntriesContext);
+  const { formIsOpen, openForm, closeForm } = useContext(UIContext);
+  
   const [inputs, setInputs] = useState<FormInputs>({
     title: "",
     description: "",
@@ -35,11 +35,11 @@ const FormNewEntry: FC = () => {
   });
 
   const handleClickOpen = () => {
-    setOpen(true);
+    openForm();
   };
 
   const handleClose = () => {
-    setOpen(false);
+    closeForm();
   };
 
   const handleChangueText = (e: ChangeEvent<HTMLInputElement>) => {
@@ -53,7 +53,7 @@ const FormNewEntry: FC = () => {
     });
 
     if (inputs.title.length != 0 && inputs.description.length != 0) {
-      addEntrie(inputs)
+      addEntrie(inputs);
       handleClose();
       setClicked({
         title: false,
@@ -63,7 +63,6 @@ const FormNewEntry: FC = () => {
         title: "",
         description: "",
       });
-      console.log(JSON.stringify(inputs));
     }
   };
 
@@ -77,7 +76,7 @@ const FormNewEntry: FC = () => {
       >
         <AddOutlinedIcon />
       </Fab>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={formIsOpen} onClose={handleClose}>
         <DialogTitle>Añadir tarea </DialogTitle>
         <DialogContent>
           <TextField
