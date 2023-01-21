@@ -36,7 +36,7 @@ e.dataTransfer.setData("id",id)
         <CardActions
           sx={{ display: "flex", justifyContent: "end", fontStyle: "italic" }}
         >
-          {/* <Typography color="text.secondary">{create}</Typography> */}
+        
         </CardActions>
       </CardActionArea>
     </Card>

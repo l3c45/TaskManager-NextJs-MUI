@@ -5,30 +5,7 @@ import { v4 } from "uuid";
 import { EntriesContext, EntrieReducer } from "./";
 
 const UI_INITIAL_STATE: EntrieState = {
-  entries: [
-    {
-      id: v4(),
-      title: "currenttest",
-      description: "loresdsfdfdfd fd fdfdfdfdfd fd d gfd hhg hgkjh jg gg jj ",
-      status: Status.current,
-      create: Date.now(),
-    },
-    {
-      id: v4(),
-      title: "donetest",
-      description:
-        "doneloresdsfdfdfd fd fdfdfdfdfd fd d gfd hhg hgkjh jg gg jj ",
-      status: Status.done,
-      create: Date.now(),
-    },
-    {
-      id: v4(),
-      title: "pendingtest",
-      description: "loresdsfdfdfd fd fdfdfdfdfd fd d gfd hhg hgkjh jg gg jj ",
-      status: Status.pending,
-      create: Date.now(),
-    },
-  ],
+  entries: [],
 };
 
 type Props = {
