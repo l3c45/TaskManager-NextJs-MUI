@@ -21,13 +21,16 @@ export const connectDB = async () => {
     await mongoose.disconnect();
   }
 
-  await mongoose.connect("mongodb://192.168.1.130:50557/entrieDB");
-  mongoose.set("strictQuery", false);
+  await mongoose.connect(process.env.MONGO_URI as string);
   mongooConnection.statusConnection = 1;
   console.log("Conectado");
 };
 
 export const disconnectDB = async () => {
+
+if(process.env.NODE_ENV==="development")return
+
+
   if (mongooConnection.statusConnection === 0) return;
 
   await mongoose.disconnect();

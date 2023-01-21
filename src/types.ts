@@ -1,4 +1,4 @@
-import { Add } from "./context/entries";
+
 
 export interface ContextProps {
   slideMenu: boolean;
@@ -20,18 +20,19 @@ export interface UIstate {
 
 export interface EntriesContextProps {
   entries: Entrie[];
-  addEntrie: ({ title, description }: Add) => void;
+  addEntrie: (entrie: Entrie) => void;
   updateEntrie: (entrie: Entrie) => void;
   removeEntrie: () => void;
+  refreshEntries: () => Promise<void>
 }
 export enum Status {
-  pending,
-  current,
-  done,
+  pending="pending",
+  current="current",
+  done="done",
 }
 
 export interface Entrie {
-  id: string;
+  _id: string;
   title: string;
   description: string;
   status: Status;

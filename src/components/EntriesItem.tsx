@@ -9,19 +9,19 @@ import { Entrie } from "@/types";
 import { CardActionArea } from "@mui/material";
 import { UIContext } from "@/context/ui";
 
-const EntriesItem: FC<Entrie> = ({ id,title, description, create }) => {
+const EntriesItem: FC<Entrie> = ({ _id,title, description, create }) => {
 
   const {startDragging,endDragging} = useContext(UIContext)
 
   const onDragStart=(e:DragEvent)=>{
     startDragging()
 
-e.dataTransfer.setData("id",id)
+e.dataTransfer.setData("id",_id)
   }
 
   const onDragEnd=()=>{
     endDragging()
-    console.log("FIN")
+    
   }
 
   const date=new Date(create).toString()

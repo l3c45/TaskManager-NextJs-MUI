@@ -4,6 +4,7 @@ type EntrieAction =
   | { type: "ENTRIE-ADD",payload:Entrie;}
   | { type: "ENTRIE-REMOVE" }
   | { type: "ENTRIE-UPDATE",payload:Entrie }
+  | { type: "ENTRIE-REFRESH",payload:Entrie[] }
 
 export const EntrieReducer = (
   state: EntrieState,
@@ -24,12 +25,17 @@ export const EntrieReducer = (
       return {
         ...state,
         entries:[...state.entries].map(entrie=>{
-          if(entrie.id===action.payload.id){
+          if(entrie._id===action.payload._id){
             entrie.status=action.payload.status
             return entrie
           }
           return entrie
         } )
+      };
+      case "ENTRIE-REFRESH":
+      return {
+        ...state,
+        entries:[...action.payload]
       };
 
     default:

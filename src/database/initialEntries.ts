@@ -2,7 +2,7 @@ import { Status } from "@/types";
 
 
 
-export const entries = [
+export const initialEntries = [
   {
     title: "currenttest",
     description: "loresdsfdfdfd fd fdfdfdfdfd fd d gfd hhg hgkjh jg gg jj ",

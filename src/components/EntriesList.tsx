@@ -25,8 +25,10 @@ const EntriesList: FC<Props> = ({ type }) => {
     
 const id=e.dataTransfer.getData("id")
 
-const entrie =entries.find(entrie=>entrie.id===id)!
+const entrie =entries.find(entrie=>entrie._id===id)!
+//console.log(id,"LIST")
 entrie.status=type
+//console.log(id,"LIST",entrie)
 updateEntrie(entrie)
 endDragging()
   }
@@ -42,8 +44,8 @@ e.preventDefault()
         elevation={2}
         sx={[{ height: "calc(100vh - 220px)", overflowY: "auto",  },isDragging && styles]}
       >
-        {pendingEntries.map((entrie) => (
-          <EntriesItem key={entrie.id} {...entrie}></EntriesItem>
+        {pendingEntries.map((entrie,i) => (
+          <EntriesItem key={i} {...entrie}></EntriesItem>
         ))}
       </Paper>
     </div>
