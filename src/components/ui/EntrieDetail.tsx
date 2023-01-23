@@ -1,7 +1,8 @@
 "use client";
 
 import { EntriesContext } from "@/context/entries";
-import { Entrie, Status } from "@/types";
+import { UIContext } from "@/context/ui";
+import { Entry, Status } from "@/types";
 import {
   Button,
   Card,
@@ -17,20 +18,23 @@ import {
   Typography,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { ChangeEvent, FC, useContext, useState } from "react";
+import { ChangeEvent, FC, useContext, useEffect, useState } from "react";
 
-interface Props{
-  entry:Entrie
+interface Props {
+  entry: Entry;
 }
 
-const EntrieDetail:FC<Props> = ({entry}) => {
-
-  const router=useRouter()
-
-  const {updateEntrie,removeEntrie} = useContext(EntriesContext)
+const EntrieDetail: FC<Props> = ({ entry }) => {
+  const router = useRouter();
+  const { loadingToEntry } = useContext(UIContext);
+  const { updateEntrie, removeEntrie } = useContext(EntriesContext);
   const [input, setInput] = useState<string>(entry.description);
   const [state, setState] = useState<Status>(entry.status);
   const [touched, setTouched] = useState<boolean>(false);
+
+  useEffect(() => {
+    loadingToEntry("");
+  }, []);
 
   const onChangeText = (e: ChangeEvent<HTMLInputElement>) => {
     setInput((prev) => e.target.value);
@@ -41,26 +45,23 @@ const EntrieDetail:FC<Props> = ({entry}) => {
 
   const onSave = () => {
     if (input.length <= 0) return;
-    console.log(input, status);
 
-    const updatedEntry={
+    const updatedEntry = {
       ...entry,
-      title:"EDIT",
-      description:input,
-      status:state
-    }
-    updateEntrie(updatedEntry)
+      description: input,
+      status: state,
+    };
+    updateEntrie(updatedEntry);
     setTouched(false);
     setInput("");
-    router.push("/")
-
+    router.push("/");
   };
 
-  const onDelete=()=>{
-    removeEntrie(entry._id)
+  const onDelete = () => {
+    removeEntrie(entry._id);
 
-    router.push("/")
-  }
+    router.push("/");
+  };
 
   return (
     <Grid
@@ -79,6 +80,7 @@ const EntrieDetail:FC<Props> = ({entry}) => {
               Editar Tarea
             </Typography>
             <TextField
+              multiline
               sx={{ width: "100%" }}
               id="standard-basic"
               label="Descripción"

@@ -6,16 +6,17 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import Switch from "@mui/material/Switch";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormGroup from "@mui/material/FormGroup";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { useContext, useState } from "react";
 import { UIContext } from "@/context/ui";
 import Link from "next/link";
+import ToggleThemeSwitch from "./ToggleThemeSwitch";
+import { useTheme } from "@mui/material";
 
 const NavBar = () => {
+
+  const theme=useTheme()
   const { openSlide } = useContext(UIContext);
   const [auth, setAuth] = useState(true);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -46,11 +47,14 @@ const NavBar = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Link style={{textDecoration:"none",color:"#fff",flexGrow: 1}}  href={"/"}>
+          <Link style={{textDecoration:"none",flexGrow: 1,color:theme.palette.primary.contrastText}}  href={"/"}>
           <Typography  variant="h6" component="div">
             Tasks Manager
           </Typography>
           </Link>
+
+
+          <ToggleThemeSwitch></ToggleThemeSwitch>
           {auth && (
             <div>
               <IconButton

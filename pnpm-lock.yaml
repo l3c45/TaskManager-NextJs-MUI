@@ -7,6 +7,7 @@ specifiers:
   '@mui/icons-material': ^5.11.0
   '@mui/material': ^5.11.5
   '@next/font': 13.1.2
+  '@types/js-cookie': ^3.0.2
   '@types/node': 18.11.18
   '@types/react': 18.0.27
   '@types/react-dom': 18.0.10
@@ -14,6 +15,7 @@ specifiers:
   date-fns: ^2.29.3
   eslint: 8.32.0
   eslint-config-next: 13.1.2
+  js-cookie: ^3.0.1
   mongoose: ^6.8.4
   next: 13.1.2
   notistack: ^2.0.8
@@ -29,12 +31,14 @@ dependencies:
   '@mui/icons-material': 5.11.0_6knf4eskaeuswjfh2cm3sznyza
   '@mui/material': 5.11.5_rqh7qj4464ntrqrt6banhaqg4q
   '@next/font': 13.1.2
+  '@types/js-cookie': 3.0.2
   '@types/node': 18.11.18
   '@types/react': 18.0.27
   '@types/react-dom': 18.0.10
   date-fns: 2.29.3
   eslint: 8.32.0
   eslint-config-next: 13.1.2_7uibuqfxkfaozanbtbziikiqje
+  js-cookie: 3.0.1
   mongoose: 6.8.4
   next: 13.1.2_biqbaboplfbrettd7655fr4n2y
   notistack: 2.0.8_gczj3z5lfgzpzk2tljsi7rjln4
@@ -1454,6 +1458,10 @@ packages:
       tslib: 2.4.1
     dev: false
 
+  /@types/js-cookie/3.0.2:
+    resolution: {integrity: sha512-6+0ekgfusHftJNYpihfkMu8BWdeHs9EOJuGcSofErjstGPfPGEu9yTu4t460lTzzAMl2cM5zngQJqPMHbbnvYA==}
+    dev: false
+
   /@types/json5/0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
     dev: false
@@ -2812,6 +2820,11 @@ packages:
 
   /isexe/2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
+    dev: false
+
+  /js-cookie/3.0.1:
+    resolution: {integrity: sha512-+0rgsUXZu4ncpPxRL+lNEptWMOWl9etvPHc/koSRp6MPwpRYAhmk0dUG00J4bxVV3r9uUzfo24wW0knS07SKSw==}
+    engines: {node: '>=12'}
     dev: false
 
   /js-sdsl/4.2.0:

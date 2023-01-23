@@ -1,6 +1,5 @@
-import { connectDB, disconnectDB, Entrie, IEntrie } from "@/database";
+import { connectDB, disconnectDB, MEntry, IEntrie } from "@/database";
 import mongoose from "mongoose";
-
 import type { NextApiRequest, NextApiResponse } from "next";
 
 type Data = { message: string } | IEntrie[] | IEntrie | null;
@@ -34,17 +33,16 @@ const updateEntrie = async (
 
   await connectDB();
 
-  const entryWithId = await Entrie.findById(id);
+  const entryWithId = await MEntry.findById(id);
 
   const {
     description = entryWithId?.description,
-    title = entryWithId?.title,
     status = entryWithId?.status,
   } = req.body;
 
-  const updatedEntry = await Entrie.findByIdAndUpdate(
+  const updatedEntry = await MEntry.findByIdAndUpdate(
     id,
-    { description, title, status },
+    { description, status },
     { runValidators: true, new: true }
   );
 
@@ -57,7 +55,7 @@ const getEntry = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   const { id } = req.query;
 
   await connectDB();
-  const entrie = await Entrie.findById(id);
+  const entrie = await MEntry.findById(id);
   await disconnectDB();
 
   res.status(200).json(entrie);
@@ -67,8 +65,7 @@ const deleteEntry = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   const { id } = req.query;
 
   await connectDB();
-  const entrie = await Entrie.findByIdAndRemove(id);
-  console.log(entrie, "borrasa");
+  const entrie = await MEntry.findByIdAndRemove(id);
   await disconnectDB();
 
   res.status(200).json(entrie);

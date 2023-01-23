@@ -1,3 +1,3 @@
 export * from "./db"
 
-export { default as Entrie, type IEntrie} from "./models/entrie"
+export { default as MEntry, type IEntrie} from "./models/entrie"

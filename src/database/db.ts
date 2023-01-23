@@ -1,19 +1,19 @@
 import mongoose from "mongoose";
 
-const mongooConnection = {
+const mongoConnection = {
   statusConnection: 0,
 };
 
 export const connectDB = async () => {
-  if (mongooConnection.statusConnection) {
+  if (mongoConnection.statusConnection) {
     console.log("Ya estamos conectados");
     return;
   }
 
   if (mongoose.connections.length > 0) {
-    mongooConnection.statusConnection = mongoose.connections[0].readyState;
+    mongoConnection.statusConnection = mongoose.connections[0].readyState;
 
-    if (mongooConnection.statusConnection === 1) {
+    if (mongoConnection.statusConnection === 1) {
       console.log("Usando conection anterior");
       return;
     }
@@ -22,7 +22,8 @@ export const connectDB = async () => {
   }
 
   await mongoose.connect(process.env.MONGO_ATLAS as string);
-  mongooConnection.statusConnection = 1;
+  mongoose.set('strictQuery', false)
+  mongoConnection.statusConnection = 1;
   console.log("Conectado");
 };
 
@@ -31,8 +32,10 @@ export const disconnectDB = async () => {
 if(process.env.NODE_ENV==="development")return
 
 
-  if (mongooConnection.statusConnection === 0) return;
+  if (mongoConnection.statusConnection === 0) return;
 
   await mongoose.disconnect();
+  mongoConnection.statusConnection = 0;
   console.log("desconectado");
 };
+

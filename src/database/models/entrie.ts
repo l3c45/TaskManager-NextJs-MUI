@@ -1,13 +1,12 @@
 import mongoose, { Model, Schema } from "mongoose";
-import type {Entrie} from "../../types"
+import type {Entry} from "../../types"
 
-export interface IEntrie extends Entrie {}
+export interface IEntrie extends Entry {}
 
 const entrieSchema = new Schema({
-  title: String,
   description: String,
   status: {
-    type: String,require:true,
+    type: String,
     enum: {
       values: ["pending", "current", "done"],
       message: "{VALUE } no es permitido  ",
@@ -16,6 +15,6 @@ const entrieSchema = new Schema({
   create: {type:Number},
 });
 
-const EntrieModel:Model<IEntrie>=mongoose.models.Entrie || mongoose.model("Entrie",entrieSchema)
+const EntryModel:Model<IEntrie>=mongoose.models.Entry || mongoose.model("Entry",entrieSchema)
 
-export default EntrieModel
+export default EntryModel

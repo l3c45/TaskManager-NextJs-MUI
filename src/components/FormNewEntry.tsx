@@ -10,27 +10,20 @@ import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { EntriesContext } from "@/context/entries";
 import { UIContext } from "@/context/ui";
 
-interface FormInputs {
-  title: string;
+export interface FormInputs {
   description: string;
 }
 
 interface FormClicked {
-  title: boolean;
   description: boolean;
 }
 
 const FormNewEntry: FC = () => {
-
   const { addEntrie } = useContext(EntriesContext);
   const { formIsOpen, openForm, closeForm } = useContext(UIContext);
-  
-  const [inputs, setInputs] = useState<FormInputs>({
-    title: "",
-    description: "",
-  });
+
+  const [input, setInput] = useState<FormInputs>({ description: "" });
   const [clicked, setClicked] = useState<FormClicked>({
-    title: false,
     description: false,
   });
 
@@ -43,24 +36,21 @@ const FormNewEntry: FC = () => {
   };
 
   const handleChangueText = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputs((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+    setInput((prev) => ({ description: e.target.value }));
   };
 
   const OnSave = () => {
     setClicked({
-      title: true,
       description: true,
     });
 
-    if (inputs.title.length != 0 && inputs.description.length != 0) {
-      addEntrie(inputs);
+    if (input.description.length != 0) {
+      addEntrie(input);
       handleClose();
       setClicked({
-        title: false,
         description: false,
       });
-      setInputs({
-        title: "",
+      setInput({
         description: "",
       });
     }
@@ -72,30 +62,17 @@ const FormNewEntry: FC = () => {
         onClick={handleClickOpen}
         color="primary"
         aria-label="add"
-        sx={{ position: "absolute", bottom: "70px", left: "50px" }}
+        sx={{ position: "fixed", bottom: "70px", left: "50px" }}
       >
         <AddOutlinedIcon />
       </Fab>
-      <Dialog open={formIsOpen} onClose={handleClose}>
+      <Dialog fullWidth sx={{}} open={formIsOpen} onClose={handleClose}>
         <DialogTitle>Añadir tarea </DialogTitle>
         <DialogContent>
+          
           <TextField
-            value={inputs.title}
-            margin="dense"
-            id="title"
-            label="Titulo"
-            type="text"
-            fullWidth
-            helperText="Debe ingresar un titulo"
-            variant="standard"
-            onChange={handleChangueText}
-            error={clicked.title && inputs.title.length <= 0 ? true : false}
-            onFocus={() =>
-              setClicked((prev) => ({ ...prev, title: !prev.title }))
-            }
-          />
-          <TextField
-            value={inputs.description}
+            multiline
+            value={input.description}
             margin="dense"
             id="description"
             label="Descripcion"
@@ -105,7 +82,7 @@ const FormNewEntry: FC = () => {
             helperText="Debe ingresar una descripción"
             onChange={handleChangueText}
             error={
-              clicked.description && inputs.description.length <= 0
+              clicked.description && input.description.length <= 0
                 ? true
                 : false
             }

@@ -1,16 +1,16 @@
-import { Entrie, EntrieState } from "@/types";
+import { Entry, EntryState } from "@/types";
 
 type EntrieAction =
-  | { type: "ENTRIE-ADD"; payload: Entrie }
+  | { type: "ENTRIE-ADD"; payload: Entry }
   | { type: "ENTRIE-REMOVE" }
-  | { type: "ENTRIE-UPDATE"; payload: Entrie }
-  | { type: "ENTRIE-REFRESH"; payload: Entrie[] }
+  | { type: "ENTRIE-UPDATE"; payload: Entry }
+  | { type: "ENTRIE-REFRESH"; payload: Entry[] }
   | { type: "ENTRIE-DELETE"; payload: string };
 
 export const EntrieReducer = (
-  state: EntrieState,
+  state: EntryState,
   action: EntrieAction
-): EntrieState => {
+): EntryState => {
   switch (action.type) {
     case "ENTRIE-ADD":
       return {
@@ -25,7 +25,8 @@ export const EntrieReducer = (
     case "ENTRIE-UPDATE":
       return {
         ...state,
-        entries: [...state.entries].map((entrie) => {
+        entries: 
+        [...state.entries].map((entrie) => {
           if (entrie._id === action.payload._id) {
             entrie.status = action.payload.status;
             return entrie;
@@ -47,7 +48,6 @@ export const EntrieReducer = (
         ...state,
         entries: entries,
       };
-
     default:
       return { ...state };
   }

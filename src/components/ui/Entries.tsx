@@ -1,25 +1,24 @@
 "use client";
 import { Status } from "@/types";
-import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import {
   Grid,
   Typography,
   Card,
   CardContent,
-  CardActions,
-  Button,
-  Fab,
+  useTheme,
 } from "@mui/material";
 import EntriesList from "../EntriesList";
 import FormNewEntry from "../FormNewEntry";
 
 const Entries = () => {
+
+  const {palette:theme}=useTheme()
   return (
     <>
     <Grid container spacing={2}>
       <Grid item xs={12} sm={4}>
-        <Card sx={{ minHeight: "calc(100vh - 150px)" }}>
-          <CardContent>
+        <Card  sx={{ minHeight: "calc(100vh - 150px)" ,backgroundColor:theme.secondary.main}}>
+          <CardContent >
             <Typography
               sx={{ fontSize: 16 }}
               color="text.secondary"
@@ -33,7 +32,7 @@ const Entries = () => {
       </Grid>
 
       <Grid item xs={12} sm={4}>
-        <Card sx={{ minHeight: "calc(100vh - 150px)" }}>
+        <Card sx={{ minHeight: "calc(100vh - 150px)",backgroundColor:theme.secondary.main }}>
           <CardContent>
             <Typography
               sx={{ fontSize: 16 }}
@@ -47,7 +46,7 @@ const Entries = () => {
         </Card>
       </Grid>
       <Grid item xs={12} sm={4}>
-        <Card sx={{ minHeight: "calc(100vh - 150px)" }}>
+        <Card sx={{ minHeight: "calc(100vh - 150px)",backgroundColor:theme.secondary.main }}>
           <CardContent>
             <Typography
               sx={{ fontSize: 16 }}
