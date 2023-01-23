@@ -21,7 +21,7 @@ export const connectDB = async () => {
     await mongoose.disconnect();
   }
 
-  await mongoose.connect(process.env.MONGO_URI as string);
+  await mongoose.connect(process.env.MONGO_ATLAS as string);
   mongooConnection.statusConnection = 1;
   console.log("Conectado");
 };

@@ -12,8 +12,10 @@ export default async function handler(
   switch (req.method) {
     case "PUT":
       return updateEntrie(req, res);
-      case "GET":
-      return getEntry( req,res);
+    case "GET":
+      return getEntry(req, res);
+    case "DELETE":
+      return deleteEntry(req, res);
 
     default:
       res.status(400).json({ message: "El metodo solicitado no es correcto" });
@@ -51,16 +53,23 @@ const updateEntrie = async (
   await disconnectDB();
 };
 
-
-const getEntry=async (req:NextApiRequest,res:NextApiResponse<Data>)=>{
-
-  const {id}=req.query
-
+const getEntry = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
+  const { id } = req.query;
 
   await connectDB();
-  const entrie = await Entrie.findById(id)
+  const entrie = await Entrie.findById(id);
   await disconnectDB();
 
   res.status(200).json(entrie);
+};
 
-}
+const deleteEntry = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
+  const { id } = req.query;
+
+  await connectDB();
+  const entrie = await Entrie.findByIdAndRemove(id);
+  console.log(entrie, "borrasa");
+  await disconnectDB();
+
+  res.status(200).json(entrie);
+};

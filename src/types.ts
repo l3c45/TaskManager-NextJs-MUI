@@ -22,7 +22,7 @@ export interface EntriesContextProps {
   entries: Entrie[];
   addEntrie: (entrie: Entrie) => void;
   updateEntrie: (entrie: Entrie) => void;
-  removeEntrie: () => void;
+  removeEntrie: (id:string) =>Promise<void> ;
   refreshEntries: () => Promise<void>
 }
 export enum Status {

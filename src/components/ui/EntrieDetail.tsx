@@ -1,6 +1,7 @@
 "use client";
 
-import { Status } from "@/types";
+import { EntriesContext } from "@/context/entries";
+import { Entrie, Status } from "@/types";
 import {
   Button,
   Card,
@@ -15,26 +16,51 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { ChangeEvent, FC, useState } from "react";
+import { useRouter } from "next/navigation";
+import { ChangeEvent, FC, useContext, useState } from "react";
 
-const EntrieDetail: FC = () => {
-  const [input, setInput] = useState<string>("");
-  const [status, setStatus] = useState<Status>(Status.pending);
+interface Props{
+  entry:Entrie
+}
+
+const EntrieDetail:FC<Props> = ({entry}) => {
+
+  const router=useRouter()
+
+  const {updateEntrie,removeEntrie} = useContext(EntriesContext)
+  const [input, setInput] = useState<string>(entry.description);
+  const [state, setState] = useState<Status>(entry.status);
   const [touched, setTouched] = useState<boolean>(false);
 
   const onChangeText = (e: ChangeEvent<HTMLInputElement>) => {
     setInput((prev) => e.target.value);
   };
   const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setStatus((prev) => e.target.value as Status);
+    setState((prev) => e.target.value as Status);
   };
 
   const onSave = () => {
     if (input.length <= 0) return;
     console.log(input, status);
+
+    const updatedEntry={
+      ...entry,
+      title:"EDIT",
+      description:input,
+      status:state
+    }
+    updateEntrie(updatedEntry)
     setTouched(false);
     setInput("");
+    router.push("/")
+
   };
+
+  const onDelete=()=>{
+    removeEntrie(entry._id)
+
+    router.push("/")
+  }
 
   return (
     <Grid
@@ -69,7 +95,7 @@ const EntrieDetail: FC = () => {
                 Estado
               </FormLabel>
               <RadioGroup
-                value={status}
+                value={state}
                 onChange={onStatusChange}
                 row
                 name="row-radio-buttons-group"
@@ -92,10 +118,18 @@ const EntrieDetail: FC = () => {
               </RadioGroup>
               <Button
                 sx={{ marginTop: "20px" }}
-                variant="contained"
+                variant="outlined"
                 onClick={onSave}
               >
                 Guardar
+              </Button>
+              <Button
+                sx={{ marginTop: "20px" }}
+                variant="outlined"
+                onClick={onDelete}
+                color="error"
+              >
+                Borrar
               </Button>
             </FormControl>
           </CardActions>

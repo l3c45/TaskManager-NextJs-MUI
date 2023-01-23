@@ -13,6 +13,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { useContext, useState } from "react";
 import { UIContext } from "@/context/ui";
+import Link from "next/link";
 
 const NavBar = () => {
   const { openSlide } = useContext(UIContext);
@@ -45,9 +46,11 @@ const NavBar = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Link style={{textDecoration:"none",color:"#fff",flexGrow: 1}}  href={"/"}>
+          <Typography  variant="h6" component="div">
             Tasks Manager
           </Typography>
+          </Link>
           {auth && (
             <div>
               <IconButton

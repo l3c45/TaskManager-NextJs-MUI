@@ -2,6 +2,7 @@ import { Entrie, EntrieState, Status } from "@/types";
 import { FC, ReactNode, useEffect, useReducer } from "react";
 
 import { EntriesContext, EntrieReducer } from "./";
+import { useSnackbar } from "notistack";
 
 const UI_INITIAL_STATE: EntrieState = {
   entries: [],
@@ -13,6 +14,8 @@ type Props = {
 
 export const EntrieProvider: FC<Props> = ({ children }) => {
   const [state, dispatch] = useReducer(EntrieReducer, UI_INITIAL_STATE);
+
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const addEntrie = async ({ description, title }: Entrie) => {
     const req = await fetch("/api/entries", {
@@ -28,12 +31,7 @@ export const EntrieProvider: FC<Props> = ({ children }) => {
     dispatch({ type: "ENTRIE-ADD", payload: entry });
   };
 
-  const updateEntrie = async ({
-    description,
-    _id,
-    title,
-    status,
-  }: Entrie) => {
+  const updateEntrie = async ({ description, _id, title, status }: Entrie) => {
     const req = await fetch(`/api/entries/${_id}`, {
       method: "PUT",
       headers: {
@@ -45,10 +43,38 @@ export const EntrieProvider: FC<Props> = ({ children }) => {
     const entry: Entrie = await req.json();
 
     dispatch({ type: "ENTRIE-UPDATE", payload: entry });
+    enqueueSnackbar("Actualizado", {
+      variant: "success",
+      autoHideDuration: 1000,
+      anchorOrigin: {
+        vertical: "top",
+        horizontal: "right",
+      },
+    });
   };
 
-  const removeEntrie = () => {
-    dispatch({ type: "ENTRIE-REMOVE" });
+  const removeEntrie = async (id: string) => {
+    const req = await fetch(`/api/entries/${id}`, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id }),
+    });
+
+    const entryDeleted: Entrie = await req.json();
+
+    dispatch({ type: "ENTRIE-DELETE", payload: entryDeleted._id });
+
+    enqueueSnackbar("Tarea Borrada", {
+      variant: "success",
+      autoHideDuration: 1000,
+      anchorOrigin: {
+        vertical: "top",
+        horizontal: "right",
+      },
+    });
   };
 
   const refreshEntries = async () => {
