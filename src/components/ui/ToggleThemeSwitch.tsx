@@ -12,7 +12,7 @@ const ToggleThemeSwitch = () => {
     const selectedTheme = checked ? "light" : "dark";
 
     toggleTheme(selectedTheme);
-    Cookies.set("theme", selectedTheme);
+    Cookies.set("theme", selectedTheme,{ sameSite:"Lax" });
   };
 
   useEffect(() => {
