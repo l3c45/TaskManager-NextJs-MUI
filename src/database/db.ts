@@ -14,7 +14,7 @@ export const connectDB = async () => {
     mongoConnection.statusConnection = mongoose.connections[0].readyState;
 
     if (mongoConnection.statusConnection === 1) {
-      console.log("Usando conection anterior");
+      console.log("Usando coneccion anterior");
       return;
     }
 

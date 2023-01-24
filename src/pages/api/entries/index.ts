@@ -41,7 +41,7 @@ const saveOneEntry = async (
     status: "pending",
   });
 
-  entrie.save();
+  await entrie.save()
 
   await disconnectDB();
 

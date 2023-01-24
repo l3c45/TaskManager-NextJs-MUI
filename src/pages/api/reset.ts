@@ -10,16 +10,16 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  if (process.env.NODE_ENV === "production") {
-    return res
-      .status(400)
-      .json({ message: "Accion no permitida desde produccion" });
-  }
-  if (process.env.NODE_ENV === "development") {
+  // if (process.env.NODE_ENV === "production") {
+  //   return res
+  //     .status(400)
+  //     .json({ message: "Accion no permitida desde produccion" });
+  // }
+  
     await connectDB();
     await MEntry.deleteMany();
     await MEntry.insertMany(initialEntries);
     await disconnectDB();
     res.status(201).json({ message: "Añadidos" });
-  }
+  
 }
