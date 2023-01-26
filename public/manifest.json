@@ -3,7 +3,7 @@
   "background_color": "#fff",
   "display": "standalone",
   "scope": "/",
-  "start_url": "http://localhost:3000/",
+  "start_url": "/",
   "name": "pwa",
   "short_name": "pwa",
   "description": "pwa",
