@@ -26,6 +26,7 @@ export interface UIstate {
 
 export interface EntriesContextProps {
   entries: Entry[];
+  loading:boolean
   addEntrie: (entrie: FormInputs) => void;
   updateEntrie: (entrie: Entry) => void;
   removeEntrie: (id:string) =>Promise<void> ;
@@ -48,4 +49,5 @@ export interface Entry {
 
 export interface EntryState {
   entries: Entry[];
+  loading:boolean
 }

@@ -2,7 +2,7 @@
 import { EntriesContext } from "@/context/entries";
 import { UIContext } from "@/context/ui";
 import { Status } from "@/types";
-import {  Paper, useTheme } from "@mui/material";
+import {  Box, CircularProgress, Paper, useTheme } from "@mui/material";
 import React, { DragEvent, FC, useContext, useMemo } from "react";
 import EntriesItem from "./EntriesItem";
 
@@ -18,7 +18,7 @@ const styles = {
 
 const EntriesList: FC<Props> = ({ type }) => {
   const {palette:theme}=useTheme()
-  const { entries, updateEntrie } = useContext(EntriesContext);
+  const {loading, entries, updateEntrie } = useContext(EntriesContext);
   const { isDragging, endDragging } = useContext(UIContext);
 
   const pendingEntries = useMemo(
@@ -64,7 +64,15 @@ const EntriesList: FC<Props> = ({ type }) => {
           isDragging && styles,
         ]}
       >
-        {pendingEntries.map((entrie, i) => (
+        {loading
+        ?  <Box sx={{ display: 'flex',justifyContent:"center",alignItems:"center",height:"100%" }}>
+        <CircularProgress />
+      </Box>
+        :
+        
+        
+        
+        pendingEntries.map((entrie, i) => (
           <EntriesItem key={i} {...entrie}></EntriesItem>
         ))}
       </Paper>

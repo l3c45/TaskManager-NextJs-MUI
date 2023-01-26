@@ -5,7 +5,8 @@ type EntrieAction =
   | { type: "ENTRIE-REMOVE" }
   | { type: "ENTRIE-UPDATE"; payload: Entry }
   | { type: "ENTRIE-REFRESH"; payload: Entry[] }
-  | { type: "ENTRIE-DELETE"; payload: string };
+  | { type: "ENTRIE-DELETE"; payload: string }
+  | { type: "ENTRIE-LOADING"; payload: boolean };
 
 export const EntrieReducer = (
   state: EntryState,
@@ -47,6 +48,13 @@ export const EntrieReducer = (
       return {
         ...state,
         entries: entries,
+      };
+      case "ENTRIE-LOADING":
+      
+
+      return {
+        ...state,
+       loading: false,
       };
     default:
       return { ...state };

@@ -6,6 +6,7 @@ import { FormInputs } from "@/components/FormNewEntry";
 
 const UI_INITIAL_STATE: EntryState = {
   entries: [],
+  loading:true
 };
 
 type Props = {
@@ -85,6 +86,7 @@ export const EntrieProvider: FC<Props> = ({ children }) => {
     const req = await fetch("/api/entries");
     const entries: Entry[] = await req.json();
     dispatch({ type: "ENTRIE-REFRESH", payload: entries });
+    dispatch({ type: "ENTRIE-LOADING", payload: false });
   };
 
   useEffect(() => {
