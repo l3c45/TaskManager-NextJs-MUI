@@ -1,23 +1,32 @@
 {
-  "theme_color": "#000",
-  "background_color": "#fff",
-  "display": "standalone",
-  "scope": "/",
-  "start_url": "/",
-  "name": "pwa",
-  "short_name": "pwa",
-  "description": "pwa",
-  "icons": [
-  
-    {
-      "src": "icons/icon-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "icons/icon-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ]
+    "theme_color": "#f5a623",
+    "background_color": "#090909",
+    "display": "fullscreen",
+    "scope": "/",
+    "start_url": "/",
+    "name": "Tasks Mnager",
+    "short_name": "TASKS",
+    "description": "Aplicacion para administrar tareas",
+    "icons": [
+        {
+            "src": "/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/icon-256x256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        },
+        {
+            "src": "/icon-384x384.png",
+            "sizes": "384x384",
+            "type": "image/png"
+        },
+        {
+            "src": "/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
 }

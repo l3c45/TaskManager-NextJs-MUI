@@ -1,12 +1,12 @@
-import { Roboto } from "@next/font/google";
+import { Inter } from "@next/font/google";
 import Entries from "@/components/ui/Entries";
 
 
-const roboto = Roboto({ weight: "400" });
+const inter = Inter({ subsets:['latin'] });
 
 export default function Home() {
   return (
-    <main style={{ padding: "2rem" }} className={`${roboto.className}`}>
+    <main style={{ padding: "2rem" }} className={`${inter.className}`}>
       <Entries></Entries>
     </main>
   );

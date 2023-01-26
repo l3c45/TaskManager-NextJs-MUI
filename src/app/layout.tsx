@@ -3,6 +3,7 @@ import NavBar from "@/components/ui/NavBar";
 import Slider from "@/components/ui/Slider";
 import "./globals.css";
 import { Providers } from "./providers";
+import Pwa from "./Pwa";
 
 export default function RootLayout({
   children,
@@ -23,7 +24,9 @@ export default function RootLayout({
           {/* <Slider></Slider> */}
 
           {children}
+
         </Providers>
+        <Pwa/>
       </body>
     </html>
   );
