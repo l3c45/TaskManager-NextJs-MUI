@@ -45,12 +45,15 @@ const EntriesItem: FC<Entry> = ({ _id,  description, create }) => {
         <CardActionArea>
           <CardContent>
             <Typography
-              sx={{ wordWrap: "break-word" }}
+              sx={{ wordWrap: "break-word",overflow: "hidden",
+              whiteSpace: "nowrap",
+               }}
               variant="subtitle1"
              
               
             >
-              <pre style={{ fontFamily: "inherit" }}>{description}</pre>
+              <pre style={{ fontFamily: "inherit",textOverflow: "ellipsis" }}>{description}
+              </pre>
             </Typography>
           </CardContent>
           <CardActions

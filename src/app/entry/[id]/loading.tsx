@@ -1,3 +1,5 @@
+import LoadingEntry from "@/components/ui/LoadingEntry";
+
 export default function Loading() {
-  return <p>Loading...</p>
+  return <LoadingEntry></LoadingEntry>;
 }
