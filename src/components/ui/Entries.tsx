@@ -5,6 +5,7 @@ import { Grid, Typography, Card, CardContent, useTheme } from "@mui/material";
 import { useContext } from "react";
 import EntriesList from "../EntriesList";
 import FormNewEntry from "../FormNewEntry";
+import Preview from "../Preview";
 import DeleteZone from "./DeleteZone";
 
 const Entries = () => {
@@ -75,6 +76,7 @@ const Entries = () => {
       </Grid>
 
       <FormNewEntry></FormNewEntry>
+      <Preview></Preview>
 
       {isDragging ? <DeleteZone></DeleteZone> : null}
     </>

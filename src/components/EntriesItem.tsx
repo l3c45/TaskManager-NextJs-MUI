@@ -9,10 +9,11 @@ import { useRouter } from "next/navigation";
 import { getFormatDistanceToNow } from "@/utils/dateToNow";
 import { Entry } from "@/types";
 
-const EntriesItem: FC<Entry> = ({ _id,  description, create }) => {
-  const router = useRouter();
+const EntriesItem: FC<Entry> = ({ _id,  description, create,status }) => {
+ 
+  
 
-  const { startDragging, endDragging, loadingToEntry, loadingEntry } =
+  const {handlePreviewModal, startDragging, endDragging, loadingToEntry, loadingEntry,togglePreview } =
     useContext(UIContext);
 
   const onDragStart = (e: DragEvent) => {
@@ -24,20 +25,28 @@ const EntriesItem: FC<Entry> = ({ _id,  description, create }) => {
   const onDragEnd = () => {
     endDragging();
   };
-  const navigate = () => {
-    loadingToEntry(_id);
-    router.push(`entry/${_id}`);
-  };
+
+  const setModal=()=>{
+    const entry:Entry={
+      _id, 
+      description,
+       status,
+        create
+    }
+    handlePreviewModal(entry)
+    togglePreview(true)
+  }
+ 
 
   return (
     // <Grow in={true}>
       <Card
-        onClick={navigate}
+       onClick={setModal }
         draggable
         onDragEnd={onDragEnd}
         onDragStart={onDragStart}
         sx={{
-          margin: "5px",
+          margin: "3px",
           backgroundColor: "transparent",
           marginBottom: "10px",
         }}

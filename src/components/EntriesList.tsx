@@ -2,10 +2,9 @@
 import { EntriesContext } from "@/context/entries";
 import { UIContext } from "@/context/ui";
 import { Status } from "@/types";
-import {  Box, CircularProgress, Paper, useTheme } from "@mui/material";
+import { Box, CircularProgress, Paper, useTheme } from "@mui/material";
 import React, { DragEvent, FC, useContext, useMemo } from "react";
 import EntriesItem from "./EntriesItem";
-
 
 type Props = {
   type: Status;
@@ -17,8 +16,8 @@ const styles = {
 };
 
 const EntriesList: FC<Props> = ({ type }) => {
-  const {palette:theme}=useTheme()
-  const {loading, entries, updateEntrie } = useContext(EntriesContext);
+  const { palette: theme } = useTheme();
+  const { loading, entries, updateEntrie } = useContext(EntriesContext);
   const { isDragging, endDragging } = useContext(UIContext);
 
   const pendingEntries = useMemo(
@@ -41,7 +40,6 @@ const EntriesList: FC<Props> = ({ type }) => {
   return (
     <div onDrop={onDrop} onDragOver={allow}>
       <Paper
-      
         elevation={2}
         sx={[
           {
@@ -64,17 +62,22 @@ const EntriesList: FC<Props> = ({ type }) => {
           isDragging && styles,
         ]}
       >
-        {loading
-        ?  <Box sx={{ display: 'flex',justifyContent:"center",alignItems:"center",height:"100%" }}>
-        <CircularProgress />
-      </Box>
-        :
-        
-        
-        
-        pendingEntries.map((entrie, i) => (
-          <EntriesItem key={i} {...entrie}></EntriesItem>
-        ))}
+        {loading ? (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100%",
+            }}
+          >
+            <CircularProgress />
+          </Box>
+        ) : (
+          pendingEntries.map((entrie, i) => (
+            <EntriesItem key={i} {...entrie}></EntriesItem>
+          ))
+        )}
       </Paper>
     </div>
   );

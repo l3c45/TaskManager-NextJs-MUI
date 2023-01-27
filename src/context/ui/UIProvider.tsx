@@ -1,4 +1,4 @@
-import { UIstate } from "@/types";
+import { Entry, UIstate } from "@/types";
 import { FC, ReactNode, useReducer } from "react";
 import { UIContext, UIReducer } from "./";
 
@@ -8,6 +8,10 @@ const UI_INITIAL_STATE: UIstate = {
   isDragging: false,
   loadingEntry: "",
   theme: "dark",
+  PreviewModal: {
+    isOpen: false,
+    entry: null,
+  },
 };
 
 type Props = {
@@ -47,6 +51,14 @@ export const UIProvider: FC<Props> = ({ children }) => {
     dispatch({ type: "UI-Theme", payload: theme });
   };
 
+  const handlePreviewModal = (entry: Entry) => {
+    dispatch({ type: "UI-Preview-Entry", payload: entry });
+  };
+
+  const togglePreview = (state: boolean) => {
+    dispatch({ type: "UI-Preview-Toggle", payload: state });
+  };
+
   return (
     <UIContext.Provider
       value={{
@@ -59,6 +71,8 @@ export const UIProvider: FC<Props> = ({ children }) => {
         closeForm,
         startDragging,
         endDragging,
+        handlePreviewModal,
+        togglePreview,
       }}
     >
       {children}
